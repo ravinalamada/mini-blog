@@ -30,11 +30,11 @@ function creatNewPost() {
 
 const submitButton = document.querySelector('#submit-form');
 
-const addNewPost = document.querySelector('#post-list');
+const divParentEl = document.querySelector('#post-list');
     submitButton.addEventListener('click', ($event) => {
-        let addPost = creatNewPost();  
-        addNewPost.appendChild(addPost);  
+        let addNewPost = creatNewPost();  
+        divParentEl.appendChild(addNewPost);  
         $event.preventDefault();
-
+        document.querySelector("form").reset();
     });
         
