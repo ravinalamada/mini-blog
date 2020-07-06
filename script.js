@@ -1,40 +1,41 @@
-console.log('it works');
+// grab the elements we need
+const postList = document.querySelector('#post-list');
+const submitBtn = document.querySelector('#submit-form');
+const postTitleInput = document.querySelector('#new-post-title');
+const postContentTextarea = document.querySelector('#new-post-content');
+const firstCheckBox = document.querySelector('#hobbies-tag');
+const secondCheckBox = document.querySelector('#school-life-tag');
+const thirdCheckBox = document.querySelector('#personal-tag');
+const addPostForm = document.querySelector('form');
 
 // code your solution in here
+// add the event listener on the submit, click
+submitBtn.addEventListener('click', ($event) => {
+	$event.preventDefault();
 
-// This funtion creat new elements
-function creatNewPost() {
-    const newFirstDiv = document.createElement('div');
-    newFirstDiv.classList.add('card', 'some-space');
-    const newSecondDiv = document.createElement('div');
-    newSecondDiv.classList.add('card-body');
-    const newHeading = document.createElement('h5');
-    newHeading.classList.add('card-title');
-    const newParagraph = document.createElement('p');
-    newParagraph.classList.add('card-text');
+	// ************** CREATE HTML ELEMENT ****************
 
-// Put content inside these new elements    
-    newHeading.textContent = document.getElementById("new-post-title").value;
-    newParagraph.textContent = document.getElementById("new-post-content").value;
-    
-// Insert these new child element in DOM
+	const myHTMLPost = `
+    <div class="card some-space">
+        <div class="card-body">
+            <h5 class="card-title">${postTitleInput.value}</h5>
+            <p class="card-text">${postContentTextarea.value}</p>
+            <span class="badge badge-light ${!firstCheckBox.checked ? 'hidden' : ''}">Hobbies</span>
+            <span class="badge badge-light ${
+				!secondCheckBox.checked ? 'hidden' : ''
+			}">School life</span>
+            <span class="badge badge-light ${
+				!thirdCheckBox.checked ? 'hidden' : ''
+			}">Personal</span>
+        </div>
+    </div>
+    `;
 
-    newFirstDiv.appendChild(newSecondDiv);
-    newSecondDiv.appendChild(newHeading);
-    newSecondDiv.appendChild(newParagraph);
+	// another way to create the HTML element inside javascript
+	//const myFragment = document.createRange().createContextualFragment(myHTMLPost);
+	//postList.appendChild(myFragment)
 
-    return newFirstDiv;
-  };
+	postList.innerHTML += myHTMLPost;
 
-// Link the input form with the submit button
-
-const submitButton = document.querySelector('#submit-form');
-
-const divParentEl = document.querySelector('#post-list');
-    submitButton.addEventListener('click', ($event) => {
-        let addNewPost = creatNewPost();  
-        divParentEl.appendChild(addNewPost);  
-        $event.preventDefault();
-        document.querySelector("form").reset();
-    });
-        
+	addPostForm.reset();
+});
