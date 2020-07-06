@@ -8,7 +8,7 @@ const secondCheckBox = document.querySelector('#school-life-tag');
 const thirdCheckBox = document.querySelector('#personal-tag');
 const addPostForm = document.querySelector('form');
 
-// code your solution in here
+
 // add the event listener on the submit, click
 submitBtn.addEventListener('click', ($event) => {
 	$event.preventDefault();
